@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 import Footer from '../components/Footer';
-import { VisibilityFilters, addTodo, toggleTodoCompletion, setVisibilityFilter, saveTodo } from '../actions';
+import {
+  VisibilityFilters, addTodo, toggleTodoCompletion,
+  setVisibilityFilter, saveTodo, updateTodo
+} from '../actions';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import todoApp from '../reducers';
@@ -40,6 +43,7 @@ export default class App extends Component {
         <TodoList
           todos={visibleTodos}
           onTodoAdded={(index, todo) => { dispatch(saveTodo(index, todo)); }}
+          onTodoUpdated={(index, todo) => { dispatch(updateTodo(index, todo)); }}
           onTodoClick={index => { dispatch(toggleTodoCompletion(index)); }} />
         <Footer 
           filter={visibilityFilter}

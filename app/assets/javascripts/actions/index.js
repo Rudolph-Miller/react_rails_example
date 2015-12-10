@@ -54,7 +54,7 @@ export function saveTodo(index, todo) {
 }
 
 function requestUpdateTodo(index) {
-  return { type: UPDATE_TODO, inedx }
+  return { type: UPDATE_TODO, index }
 }
 
 function receiveUpdatedTodo(index) {

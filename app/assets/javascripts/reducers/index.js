@@ -35,6 +35,22 @@ function saveTodo(todo, action) {
   }
 }
 
+function updateTodo(todo, action) {
+  switch (action.status) {
+    case 'OK': {
+      return Object.assign({}, todo, action.todo, {
+        isSaved: true,
+        isSaving: false
+      });
+    }
+    default: {
+      return Object.assign({}, todo, {
+        isSaving: true
+      });
+    }
+  }
+}
+
 function todos(todos = [], action = {}) {
   switch (action.type) {
     case ADD_TODO: {
@@ -74,7 +90,7 @@ function todos(todos = [], action = {}) {
     case UPDATE_TODO: {
       return [
         ...todos.slice(0, action.index),
-        saveTodo(todos[action.index], action),
+        updateTodo(todos[action.index], action),
         ...todos.slice(action.index + 1)
       ];
     }

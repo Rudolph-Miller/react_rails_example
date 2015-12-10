@@ -14,16 +14,26 @@ class TodosController < ApplicationController
     if todo.save
       render json: { status: 'ok', todo: todo }
     else
-      render json: todo.errors, status: 400
+      render json: { messages: todo.errors.full_messages, status: 400 }
     end
   end
 
   def update
+    todo = Todo.find(params[:id])
+    if todo.update(update_params)
+      render json: { status: 'ok', todo: todo }
+    else
+      render json: { messages: todo.errors.full_messages, status: 400 }
+    end
   end
 
   private
 
   def todo_params
+    params.require(:todo).permit(:text, :completed)
+  end
+
+  def update_params
     params.require(:todo).permit(:text, :completed)
   end
 end

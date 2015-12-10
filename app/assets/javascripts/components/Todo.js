@@ -2,8 +2,13 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Todo extends Component {
   componentDidMount() {
-    if (!this.props.saved)
+    if (!(this.props.isSaved || this.props.isSaving))
       this.props.onAdded();
+  }
+
+  componentDidUpdate() {
+    if (!(this.props.isSaved || this.props.isSaving))
+      this.props.onUpdated();
   }
 
   render() {
@@ -33,6 +38,7 @@ export default class Todo extends Component {
 
 Todo.propTypes = {
   onAdded: PropTypes.func.isRequired,
+  onUpdated: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   id: PropTypes.number,
   text: PropTypes.string.isRequired,
