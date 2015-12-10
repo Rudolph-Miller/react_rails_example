@@ -4,3 +4,4 @@ export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const SAVE_TODO = 'SAVE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const FETCH_TODOS = 'FETCH_TODOS';
+export const SET_TODOS = 'SET_TODOS';

@@ -1,7 +1,7 @@
 import {
   ADD_TODO, TOGGLE_TODO_COMPLETION,
   SET_VISIBILITY_FILTER, SAVE_TODO,
-  UPDATE_TODO, FETCH_TODOS
+  UPDATE_TODO, FETCH_TODOS, SET_TODOS
 } from './actionTypes';
 import fetch from 'isomorphic-fetch';
 
@@ -102,4 +102,8 @@ export function fetchTodos() {
       dispatch(receiveFetchedTodos(json.todos))
     });
   };
+}
+
+export function setTodos(todos) {
+  return { type: SET_TODOS, todos }
 }
