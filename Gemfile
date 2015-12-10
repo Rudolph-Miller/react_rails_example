@@ -57,3 +57,5 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_rewinder'
 end
+
+gem 'active_model_serializers'
