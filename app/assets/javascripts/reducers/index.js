@@ -1,8 +1,8 @@
 import { VisibilityFilters } from '../actions';
 import {
-  ADD_TODO, COMPLETE_TODO,
-  SET_VISIBILITY_FILTER,
-  SAVE_TODO, UPDATE_TODO
+  ADD_TODO, TOGGLE_TODO_COMPLETION,
+  SET_VISIBILITY_FILTER, SAVE_TODO,
+  UPDATE_TODO
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -52,13 +52,14 @@ function todos(todos = [], action = {}) {
         return todos;
       }
     }
-    case COMPLETE_TODO: {
+    case TOGGLE_TODO_COMPLETION: {
+      const todo = todos[action.index];
       return [
         ...todos.slice(0, action.index),
-        Object.assign({}, todos[action.index], {
+        Object.assign({}, todo , {
           isSaved: false,
           isSaved: false,
-          completed: true
+          completed: todo.completed ? false : true
         }),
         ...todos.slice(action.index + 1)
       ];

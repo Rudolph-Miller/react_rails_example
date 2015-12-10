@@ -1,7 +1,7 @@
 import {
-  ADD_TODO, COMPLETE_TODO,
-  SET_VISIBILITY_FILTER,
-  SAVE_TODO, UPDATE_TODO
+  ADD_TODO, TOGGLE_TODO_COMPLETION,
+  SET_VISIBILITY_FILTER, SAVE_TODO,
+  UPDATE_TODO
 } from './actionTypes';
 import fetch from 'isomorphic-fetch';
 
@@ -15,8 +15,8 @@ export function addTodo(text) {
   return { type: ADD_TODO, text };
 }
 
-export function completeTodo(index) {
-  return { type: COMPLETE_TODO, index };
+export function toggleTodoCompletion(index) {
+  return { type: TOGGLE_TODO_COMPLETION, index };
 }
 
 export function setVisibilityFilter(filter) {
