@@ -60,3 +60,4 @@ end
 
 gem 'active_model_serializers'
 gem 'react-rails'
+gem 'browserify-rails'

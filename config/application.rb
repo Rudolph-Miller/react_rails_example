@@ -45,5 +45,7 @@ module ReactRailsExample
         request_specs: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
+
+    config.browserify_rails.commandline_options = '-t babelify'
   end
 end

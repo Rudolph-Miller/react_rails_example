@@ -1,0 +1,31 @@
+{
+  "name": "react_rails_example",
+  "version": "1.0.0",
+  "description": "Example of React Rails",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rudolph-Miller/react_rails_example.git"
+  },
+  "keywords": [
+    "React",
+    "Rails"
+  ],
+  "author": "Rudolph-Miller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rudolph-Miller/react_rails_example/issues"
+  },
+  "homepage": "https://github.com/Rudolph-Miller/react_rails_example#readme",
+  "devDependencies": {
+    "babel-core": "^5.8.34",
+    "babelify": "^6.4.0",
+    "browserify": "^12.0.1",
+    "browserify-incremental": "^3.0.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
+  }
+}

@@ -1,6 +1,9 @@
 class TodosController < ApplicationController
   def index
     @todos = Todo.all
-    render json: @todos, each_serializer: TodoSerializer
+    respond_to do |format|
+      format.html
+      format.json { render json: @todos, each_serializer: TodoSerializer }
+    end
   end
 end
