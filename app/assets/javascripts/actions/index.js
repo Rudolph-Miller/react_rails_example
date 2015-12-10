@@ -1,4 +1,8 @@
-import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, SAVE_TODO } from './actionTypes';
+import {
+  ADD_TODO, COMPLETE_TODO,
+  SET_VISIBILITY_FILTER,
+  SAVE_TODO, UPDATE_TODO
+} from './actionTypes';
 import fetch from 'isomorphic-fetch';
 
 export const VisibilityFilters = {
@@ -19,12 +23,12 @@ export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter };
 }
 
-export function requestSaveTodo(index) {
+function requestSaveTodo(index) {
   return { type: SAVE_TODO, index };
 }
 
-export function receiveSavedTodo(index) {
-  return { type: SAVE_TODO, status: 'OK', index }
+function receiveSavedTodo(index, todo) {
+  return { type: SAVE_TODO, status: 'OK', index, todo}
 }
 
 export function saveTodo(index, todo) {
@@ -42,9 +46,41 @@ export function saveTodo(index, todo) {
         }
       })
     }).then(response => {
+      return response.json();
+    }).then(json => {
+      dispatch(receiveSavedTodo(index, json.todo));
+    });
+  };
+}
+
+function requestUpdateTodo(index) {
+  return { type: UPDATE_TODO, inedx }
+}
+
+function receiveUpdatedTodo(index) {
+  return { type: UPDATE_TODO, status: 'OK', index }
+}
+
+export function updateTodo(index, todo) {
+  return dispatch => {
+    dispatch(requestUpdateTodo(index));
+    return fetch('/todos/' + todo.id,{
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        todo: {
+          id: todo.id,
+          text: todo.text,
+          completed: todo.completed
+        }
+      })
+    }).then(response => {
       response.json();
     }).then(json => {
-      dispatch(receiveSavedTodo(index));
+      dispatch(receiveUpdatedTodo(index));
     });
   };
 }

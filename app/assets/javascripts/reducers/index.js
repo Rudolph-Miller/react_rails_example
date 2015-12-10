@@ -1,5 +1,9 @@
 import { VisibilityFilters } from '../actions';
-import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, SAVE_TODO } from '../actions/actionTypes';
+import {
+  ADD_TODO, COMPLETE_TODO,
+  SET_VISIBILITY_FILTER,
+  SAVE_TODO, UPDATE_TODO
+} from '../actions/actionTypes';
 
 const initialState = {
   visibilityFilter: VisibilityFilters.SHOW_ALL,
@@ -18,7 +22,7 @@ function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action = {}) {
 function saveTodo(todo, action) {
   switch (action.status) {
     case 'OK': {
-      return Object.assign({}, todo, {
+      return Object.assign({}, todo, action.todo, {
         isSaved: true,
         isSaving: false
       });
@@ -60,6 +64,13 @@ function todos(todos = [], action = {}) {
       ];
     }
     case SAVE_TODO: {
+      return [
+        ...todos.slice(0, action.index),
+        saveTodo(todos[action.index], action),
+        ...todos.slice(action.index + 1)
+      ];
+    }
+    case UPDATE_TODO: {
       return [
         ...todos.slice(0, action.index),
         saveTodo(todos[action.index], action),

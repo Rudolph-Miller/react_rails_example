@@ -21,6 +21,8 @@ export default class Todo extends Component {
           textDecoration: this.props.completed ? 'line-through' : 'none',
           cursor: this.props.completed ? 'default' : 'pointer'
         }} >
+        {this.props.id ? this.props.id : '@'}
+        {'. '}
         {this.props.text}
         {' '}
         {status}
@@ -32,6 +34,7 @@ export default class Todo extends Component {
 Todo.propTypes = {
   onAdded: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  id: PropTypes.number,
   text: PropTypes.string.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
