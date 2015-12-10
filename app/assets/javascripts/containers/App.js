@@ -5,7 +5,7 @@ import TodoList from '../components/TodoList';
 import Footer from '../components/Footer';
 import {
   VisibilityFilters, addTodo, toggleTodoCompletion,
-  setVisibilityFilter, saveTodo, updateTodo
+  setVisibilityFilter, saveTodo, updateTodo, fetchTodos
 } from '../actions';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -34,6 +34,11 @@ function selectTodos(todos, filter) {
   };
 })
 export default class App extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchTodos());
+  }
+
   render() {
     const { dispatch, visibleTodos, visibilityFilter } = this.props;
     return (

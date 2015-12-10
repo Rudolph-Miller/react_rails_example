@@ -2,7 +2,7 @@ import { VisibilityFilters } from '../actions';
 import {
   ADD_TODO, TOGGLE_TODO_COMPLETION,
   SET_VISIBILITY_FILTER, SAVE_TODO,
-  UPDATE_TODO
+  UPDATE_TODO, FETCH_TODOS
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -51,6 +51,22 @@ function updateTodo(todo, action) {
   }
 }
 
+function fetchTodo(todos, action) {
+  switch (action.status) {
+    case 'OK': {
+      return action.todos.map(todo => {
+        return Object.assign({}, todo, {
+          isSaved: true,
+          isSaving: false
+        });
+      });
+    }
+    default: {
+      return todos;
+    }
+  }
+}
+
 function todos(todos = [], action = {}) {
   switch (action.type) {
     case ADD_TODO: {
@@ -93,6 +109,9 @@ function todos(todos = [], action = {}) {
         updateTodo(todos[action.index], action),
         ...todos.slice(action.index + 1)
       ];
+    }
+    case FETCH_TODOS: {
+      return fetchTodo(todos, action);
     }
     default:
       return todos;

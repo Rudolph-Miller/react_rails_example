@@ -1,7 +1,7 @@
 import {
   ADD_TODO, TOGGLE_TODO_COMPLETION,
   SET_VISIBILITY_FILTER, SAVE_TODO,
-  UPDATE_TODO
+  UPDATE_TODO, FETCH_TODOS
 } from './actionTypes';
 import fetch from 'isomorphic-fetch';
 
@@ -78,9 +78,28 @@ export function updateTodo(index, todo) {
         }
       })
     }).then(response => {
-      response.json();
+      return response.json();
     }).then(json => {
       dispatch(receiveUpdatedTodo(index));
+    });
+  };
+}
+
+function requestFetchTodos() {
+  return { type: FETCH_TODOS };
+}
+
+function receiveFetchedTodos(todos) {
+  return { type: FETCH_TODOS, status: 'OK', todos };
+}
+
+export function fetchTodos() {
+  return dispatch => {
+    dispatch(requestFetchTodos());
+    return fetch('/todos.json').then(response => {
+      return response.json();
+    }).then(json => {
+      dispatch(receiveFetchedTodos(json.todos))
     });
   };
 }
